@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Furnirure_salon_PershinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="id_customer" />
+    </Key>
+    <Property Name="id_customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="discount" Type="Int32" />
+    <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="Self.FK_orders_customers" FromRole="customers" ToRole="orders" />
+  </EntityType>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="ID_department" />
+    </Key>
+    <Property Name="ID_department" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_employee_department" FromRole="department" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="id_employee" />
+    </Key>
+    <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_of_employment" Type="DateTime" Precision="0" />
+    <Property Name="passport_series" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="passport_number" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="id_department" Type="Int32" />
+    <Property Name="id_position" Type="Int32" />
+    <NavigationProperty Name="department" Relationship="Self.FK_employee_department" FromRole="employee" ToRole="department" />
+    <NavigationProperty Name="positions" Relationship="Self.FK_employee_positions" FromRole="employee" ToRole="positions" />
+    <NavigationProperty Name="orders" Relationship="Self.FK_orders_employee" FromRole="employee" ToRole="orders" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="id_order" />
+    </Key>
+    <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_customer" Type="Int32" />
+    <Property Name="id_employee" Type="Int32" />
+    <Property Name="id_product" Type="Int32" />
+    <Property Name="date_of_application" Type="DateTime" Precision="0" />
+    <Property Name="delivery_date" Type="DateTime" Precision="0" />
+    <Property Name="home_delivery" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="quantity_product" Type="Int32" />
+    <NavigationProperty Name="customers" Relationship="Self.FK_orders_customers" FromRole="orders" ToRole="customers" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_orders_employee" FromRole="orders" ToRole="employee" />
+    <NavigationProperty Name="product" Relationship="Self.FK_orders_product" FromRole="orders" ToRole="product" />
+  </EntityType>
+  <EntityType Name="positions">
+    <Key>
+      <PropertyRef Name="ID_position" />
+    </Key>
+    <Property Name="ID_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_employee_positions" FromRole="positions" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="ID_product" />
+    </Key>
+    <Property Name="ID_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_type_of_furniture" Type="Int32" />
+    <Property Name="quantity_product" Type="Int32" />
+    <Property Name="id_suppliers" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="name_product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="Self.FK_orders_product" FromRole="product" ToRole="orders" />
+    <NavigationProperty Name="suppliers" Relationship="Self.FK_product_suppliers" FromRole="product" ToRole="suppliers" />
+    <NavigationProperty Name="types_of_furniture" Relationship="Self.FK_product_types_of_furniture" FromRole="product" ToRole="types_of_furniture" />
+  </EntityType>
+  <EntityType Name="suppliers">
+    <Key>
+      <PropertyRef Name="id_suppliers" />
+    </Key>
+    <Property Name="id_suppliers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product" Relationship="Self.FK_product_suppliers" FromRole="suppliers" ToRole="product" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="types_of_furniture">
+    <Key>
+      <PropertyRef Name="id_type_of_furniture" />
+    </Key>
+    <Property Name="id_type_of_furniture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product" Relationship="Self.FK_product_types_of_furniture" FromRole="types_of_furniture" ToRole="product" />
+  </EntityType>
+  <Association Name="FK_orders_customers">
+    <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="id_customer" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="id_customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employee_department">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="ID_department" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="id_department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employee_positions">
+    <End Role="positions" Type="Self.positions" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="positions">
+        <PropertyRef Name="ID_position" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="id_position" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orders_employee">
+    <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="id_employee" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="id_employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orders_product">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="ID_product" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="id_customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_suppliers">
+    <End Role="suppliers" Type="Self.suppliers" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="suppliers">
+        <PropertyRef Name="id_suppliers" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="id_suppliers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_types_of_furniture">
+    <End Role="types_of_furniture" Type="Self.types_of_furniture" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="types_of_furniture">
+        <PropertyRef Name="id_type_of_furniture" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="id_type_of_furniture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Furnirure_salon_Pershina" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="customers" EntityType="Self.customers" />
+    <EntitySet Name="department" EntityType="Self.department" />
+    <EntitySet Name="employee" EntityType="Self.employee" />
+    <EntitySet Name="orders" EntityType="Self.orders" />
+    <EntitySet Name="positions" EntityType="Self.positions" />
+    <EntitySet Name="product" EntityType="Self.product" />
+    <EntitySet Name="suppliers" EntityType="Self.suppliers" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="types_of_furniture" EntityType="Self.types_of_furniture" />
+    <AssociationSet Name="FK_orders_customers" Association="Self.FK_orders_customers">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employee_department" Association="Self.FK_employee_department">
+      <End Role="department" EntitySet="department" />
+      <End Role="employee" EntitySet="employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employee_positions" Association="Self.FK_employee_positions">
+      <End Role="positions" EntitySet="positions" />
+      <End Role="employee" EntitySet="employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orders_employee" Association="Self.FK_orders_employee">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orders_product" Association="Self.FK_orders_product">
+      <End Role="product" EntitySet="product" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_suppliers" Association="Self.FK_product_suppliers">
+      <End Role="suppliers" EntitySet="suppliers" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_types_of_furniture" Association="Self.FK_product_types_of_furniture">
+      <End Role="types_of_furniture" EntitySet="types_of_furniture" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

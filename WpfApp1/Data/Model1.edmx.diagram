@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8dc54d851d44888be0898146c651ccc" Name="Diagram1">
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.customers" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.department" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.employee" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.orders" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.positions" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.product" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.suppliers" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Furnirure_salon_PershinaModel.types_of_furniture" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_orders_customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_employee_department" ManuallyRouted="false" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_employee_positions" ManuallyRouted="false" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_orders_employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_orders_product" ManuallyRouted="false" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_product_suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="Furnirure_salon_PershinaModel.FK_product_types_of_furniture" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
