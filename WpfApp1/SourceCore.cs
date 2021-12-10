@@ -9,6 +9,6 @@ namespace WpfApp1
 {
     class SourceCore
     {
-        public static Furnirure_salon_Pershina DB = new Furnirure_salon_Pershina();
+        public static Furnirure_salon_Pershina1 DB = new Furnirure_salon_Pershina1();
     }
 }

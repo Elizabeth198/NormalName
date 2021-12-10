@@ -97,6 +97,9 @@
     <Compile Include="Data\product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\registration.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\suppliers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -106,8 +109,11 @@
     <Compile Include="Data\types_of_furniture.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Registrr.xaml.cs">
-      <DependentUpon>Registrr.xaml</DependentUpon>
+    <Compile Include="RegistrForm.xaml.cs">
+      <DependentUpon>RegistrForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrWindow.xaml.cs">
+      <DependentUpon>RegistrWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SourceCore.cs" />
     <Page Include="MainWindow.xaml">
@@ -154,7 +160,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Registrr.xaml">
+    <Page Include="RegistrForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegistrWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,6 +231,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\furnitures.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Data\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -231,8 +244,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Images\Library.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,10 +13,10 @@ namespace WpfApp1.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Furnirure_salon_Pershina : DbContext
+    public partial class Furnirure_salon_Pershina1 : DbContext
     {
-        public Furnirure_salon_Pershina()
-            : base("name=Furnirure_salon_Pershina")
+        public Furnirure_salon_Pershina1()
+            : base("name=Furnirure_salon_Pershina1")
         {
         }
     
@@ -34,5 +34,6 @@ namespace WpfApp1.Data
         public virtual DbSet<suppliers> suppliers { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<types_of_furniture> types_of_furniture { get; set; }
+        public virtual DbSet<registration> registration { get; set; }
     }
 }

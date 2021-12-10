@@ -66,6 +66,15 @@
     <Property Name="name_product" Type="varchar" MaxLength="50" />
     <Property Name="color" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="registration">
+    <Key>
+      <PropertyRef Name="id_registr" />
+    </Key>
+    <Property Name="id_registr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="10" />
+    <Property Name="PASSWORD_N" Type="nchar" MaxLength="10" />
+    <Property Name="role" Type="int" />
+  </EntityType>
   <EntityType Name="suppliers">
     <Key>
       <PropertyRef Name="id_suppliers" />
@@ -185,6 +194,7 @@
     <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="positions" EntityType="Self.positions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="registration" EntityType="Self.registration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="suppliers" EntityType="Self.suppliers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="types_of_furniture" EntityType="Self.types_of_furniture" Schema="dbo" store:Type="Tables" />

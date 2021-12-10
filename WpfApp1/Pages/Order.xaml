@@ -5,50 +5,122 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1200"
       Title="Order">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="0" x:Name="SplitterColumn"/>
-            <ColumnDefinition Width="0" x:Name="ChangeColumn" MaxWidth="250"/>
-            <ColumnDefinition Width="0" x:Name="SplitterColumnTwo"/>
-            <ColumnDefinition Width="0" x:Name="ChangeColumnTwo" MaxWidth="250"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
+            <RowDefinition x:Name="TeacherRow" Height="0*"/>
         </Grid.RowDefinitions>
-        <Rectangle Fill="Beige" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <Label Content="Заказы" Grid.ColumnSpan="3" FontSize="20" 
-               VerticalAlignment="Bottom" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="AddCust" Content="Новый клиент" Width="90" Margin="5,5" />
-            <Button x:Name="CopyCust" Content="Копировать" Width="75" Margin="5,5" />
-            <Button x:Name="EditCust" Content="Изменить" Width="75" Margin="5,5"/>
-            <Button x:Name="DeleteCust" Content="Удалить" Width="75" Margin="5,5"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450" MinWidth="200"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="0" x:Name="SplitterColumn"/>
+            <ColumnDefinition Width="0" MaxWidth="200" x:Name="ChangeColumn"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Сотрудники" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="26" FontWeight="ExtraBold" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button x:Name="AddOrder" Click="ClickAddOrder" Content="Добавить" Width="75" Margin="5,0,0,5"/>
         </StackPanel>
-        <DataGrid x:Name="DataGridOrder" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False">
+        
+        <!--Master-таблица-->
+        <DataGrid x:Name="DataGridEmp" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns >
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
-                       Клиенты
+                        Фамилия
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding id_customer}"/>
+                            <Label Content="{Binding surname}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
-                       Сотрудники
+                        Отчество
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding id_employee}"/>
+                            <Label Content="{Binding patronymic}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Имя
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Телефон
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding telephone}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Дата приема заказа
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding date_of_employment}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Отдел
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding department.name_department}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.Header>
+                        Должность
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding positions.name_position}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <GridSplitter x:Name="BookCopyGridSplitter" Grid.Column="1" Grid.Row="2" Width="1" HorizontalAlignment="Stretch" />
+
+
+
+        <GridSplitter x:Name="TeacherCopyGridSplitter" Grid.Column="1" Grid.Row="3" Width="3" HorizontalAlignment="Stretch" />
+        <!--Detail-таблица-->
+        <Label Content="Заказы" Grid.Column="2" Grid.Row="0"  FontSize="26" FontWeight="ExtraBold" HorizontalAlignment="Center"/>
+        <DataGrid x:Name="DataGridOrd" SelectedCellsChanged="TestingDataGrid_SelectedCellsChanged" ItemsSource ="{Binding ElementName=DataGridOrd, Path=SelectedItem.order}"  
+                  Grid.Row="2" Grid.Column="2" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="TestingDataGrid_SelectionChanged">
+            <DataGrid.Columns >
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Фамилия клиента
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding customers.surname}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -58,7 +130,7 @@
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding id_product}"/>
+                            <Label Content="{Binding product.name_product}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -74,17 +146,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
-                        Количество товаров
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding quantity_product}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="*">
-                    <DataGridTemplateColumn.Header>
-                        Доставка
+                        Дата получения
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -92,7 +154,56 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Доставка
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding home_delivery}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Количество
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding quantity_product}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+          
+            
+        </StackPanel>
+         <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Width="5"/>
+
+        <Button Content="X" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseEdChangeClick" Width="20" Height="20" />
+        <ScrollViewer Grid.Column="5" Grid.Row="2">
+            <StackPanel Orientation="Vertical" >
+            <Label Content="Заказы" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Left" FontSize="16" FontStyle="Italic"/>
+            <Label Content = "Фамилия клиента" Foreground="Black"/>
+                <ComboBox x:Name="ComboBoxCust" DisplayMemberPath="surname" Text="{Binding SelectedItem.customers.surname, ElementName=DataGridCustomers }" />
+                <Label Content = "Фамилия сотрудника" Foreground="Black"/>
+                <ComboBox x:Name="ComboBoxEmp" DisplayMemberPath="surname" Text="{Binding SelectedItem.employee.surname, ElementName=DataGridEmp }" />
+                <Label Content = "Мебель" Foreground="Black"/>
+                <ComboBox x:Name="ComboBoxPro" DisplayMemberPath="name_product" Text="{Binding SelectedItem.product.name_product, ElementName=DataGridPro }" />
+                <Label Content="Дата приема заказа" Foreground="Black"/>
+            <DatePicker Text="{Binding ElementName=DataGridOrd, Path=SelectedItem.date_of_employment}" x:Name="DatePick"/>
+                <Label Content="Дата получения заказа" Foreground="Black"/>
+                <DatePicker Text="{Binding ElementName=DataGridOrd, Path=SelectedItem.delivery_date}" x:Name="DatePickDel"/>
+                <Label Content = "Доставка" Foreground="Black"/>
+                <TextBox Text="{Binding ElementName=DataGridOrd, Path=SelectedItem.delivery_date}" x:Name="DelTextBox"/>
+                <Label Content = "Количество" Foreground="Black"/>
+                <TextBox Text="{Binding ElementName=DataGridOrd, Path=SelectedItem.delivery_date}" x:Name="CountTextBox"/>
+            <Button Content="Принять" Click="CommitButtonOrd" Margin="0 10 0 10"/>
+        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

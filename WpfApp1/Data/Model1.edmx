@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Furnirure_salon_PershinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Furnirure_salon_PershinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="customers">
           <Key>
             <PropertyRef Name="id_customer" />
@@ -70,6 +70,15 @@
           <Property Name="price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="name_product" Type="varchar" MaxLength="50" />
           <Property Name="color" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="id_registr" />
+          </Key>
+          <Property Name="id_registr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" />
+          <Property Name="PASSWORD_N" Type="nchar" MaxLength="10" />
+          <Property Name="role" Type="int" />
         </EntityType>
         <EntityType Name="suppliers">
           <Key>
@@ -190,6 +199,7 @@
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="positions" EntityType="Self.positions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registration" EntityType="Self.registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="suppliers" EntityType="Self.suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="types_of_furniture" EntityType="Self.types_of_furniture" Schema="dbo" store:Type="Tables" />
@@ -222,8 +232,7 @@
             <End Role="product" EntitySet="product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Furnirure_salon_PershinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -335,6 +344,15 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="product" Relationship="Self.FK_product_types_of_furniture" FromRole="types_of_furniture" ToRole="product" />
         </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="id_registr" />
+          </Key>
+          <Property Name="id_registr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PASSWORD_N" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="role" Type="Int32" />
+        </EntityType>
         <Association Name="FK_orders_customers">
           <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
           <End Role="orders" Type="Self.orders" Multiplicity="*" />
@@ -419,7 +437,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Furnirure_salon_Pershina" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Furnirure_salon_Pershina1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="customers" EntityType="Self.customers" />
           <EntitySet Name="department" EntityType="Self.department" />
           <EntitySet Name="employee" EntityType="Self.employee" />
@@ -429,6 +447,7 @@
           <EntitySet Name="suppliers" EntityType="Self.suppliers" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="types_of_furniture" EntityType="Self.types_of_furniture" />
+          <EntitySet Name="registration" EntityType="Self.registration" />
           <AssociationSet Name="FK_orders_customers" Association="Self.FK_orders_customers">
             <End Role="customers" EntitySet="customers" />
             <End Role="orders" EntitySet="orders" />
@@ -463,7 +482,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Furnirure_salon_PershinaModelStoreContainer" CdmEntityContainer="Furnirure_salon_Pershina">
+        <EntityContainerMapping StorageEntityContainer="Furnirure_salon_PershinaModelStoreContainer" CdmEntityContainer="Furnirure_salon_Pershina1">
           <EntitySetMapping Name="customers">
             <EntityTypeMapping TypeName="Furnirure_salon_PershinaModel.customers">
               <MappingFragment StoreEntitySet="customers">
@@ -564,6 +583,16 @@
               <MappingFragment StoreEntitySet="types_of_furniture">
                 <ScalarProperty Name="id_type_of_furniture" ColumnName="id_type_of_furniture" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registration">
+            <EntityTypeMapping TypeName="Furnirure_salon_PershinaModel.registration">
+              <MappingFragment StoreEntitySet="registration">
+                <ScalarProperty Name="id_registr" ColumnName="id_registr" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="PASSWORD_N" ColumnName="PASSWORD_N" />
+                <ScalarProperty Name="role" ColumnName="role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Furnirure_salon_PershinaModelStoreContainer" CdmEntityContainer="Furnirure_salon_Pershina">
+  <EntityContainerMapping StorageEntityContainer="Furnirure_salon_PershinaModelStoreContainer" CdmEntityContainer="Furnirure_salon_Pershina1">
     <EntitySetMapping Name="customers">
       <EntityTypeMapping TypeName="Furnirure_salon_PershinaModel.customers">
         <MappingFragment StoreEntitySet="customers">
@@ -101,6 +101,16 @@
         <MappingFragment StoreEntitySet="types_of_furniture">
           <ScalarProperty Name="id_type_of_furniture" ColumnName="id_type_of_furniture" />
           <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registration">
+      <EntityTypeMapping TypeName="Furnirure_salon_PershinaModel.registration">
+        <MappingFragment StoreEntitySet="registration">
+          <ScalarProperty Name="id_registr" ColumnName="id_registr" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="PASSWORD_N" ColumnName="PASSWORD_N" />
+          <ScalarProperty Name="role" ColumnName="role" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

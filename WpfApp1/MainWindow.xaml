@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Мебельный салон" Height="450" Width="800">
+        Title="Мебельный салон" FontSize="14" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="110" MinWidth="110"/>
@@ -19,7 +19,7 @@
         <Frame x:Name="RootFrame" Grid.Column="2" Grid.Row="0" NavigationUIVisibility="Hidden"
                LoadCompleted="RootFrame_LoadCompleted" />
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="DimGray" >
-            <Image Source="Images/Library.png"/>
+            <Image Source="Images/furnitures.png"/>
             <Button x:Name="ProductButton" Content="Мебель" Margin="5,5"
                     Click="ProductButton_Click"/>
             <Button x:Name="OrderButton" Content="Заказы" Margin="5,5"
@@ -39,13 +39,13 @@
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
            
-            <Button x:Name="PreviosPageButton" Content="Назад" Width="75" Margin="5,5"
+            <Button x:Name="PreviosPageButton" Content="Назад" Width="75" Margin="2"
                     Click="PreviosPageButton_Click"/>
-            <Button x:Name="NextPageButton" Content="Вперед" Width="75" Margin="5,5"
+            <Button x:Name="NextPageButton" Content="Вперед" Width="75" Margin="2"
                     Click="NextPageButton_Click"/>
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="ClosePageButton" Content="Закрыть страницу" Width="120" Margin="5"
+            <Button x:Name="ClosePageButton" Content="Закрыть страницу" Width="120" Margin="2"
                     Click="ClosePageButton_Click"/>
         </StackPanel>
     </Grid>

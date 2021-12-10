@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WpfApp1.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Employee">
+      Title="Employee" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,13 +20,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Rectangle Fill="Beige" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <Label Content="Сотрудники" Grid.ColumnSpan="3" FontSize="20" 
-               VerticalAlignment="Bottom" />
+        <Label Content="Сотрудники"  Grid.RowSpan="3"  FontSize="26" FontWeight="ExtraBold" HorizontalAlignment="Left"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="AddBook" Content="Новый сотрудник" Width="75" Margin="5,5" Click="AddEmp_click"/>
-            <Button x:Name="CopyBook" Content="Копировать" Width="75" Margin="5,5"/>
-            <Button x:Name="EditBook" Content="Изменить" Width="75" Margin="5,5" Click="AddEmp_click"/>
-            <Button x:Name="DeleteBook" Content="Удалить" Width="75" Margin="5,5" Click="DeleteEmp_Click"/>
+            <Button x:Name="AddEmp" Content="Новая" Width="75" Margin="5,5" Click="AddEmp_click"/>
+            <Button x:Name="CopyEmp" Content="Копировать" Width="75" Margin="5,5" Click="AddEmp_click"/>
+            <Button x:Name="EditEmp" Content="Изменить" Width="75" Margin="5,5" Click="AddEmp_click"/>
+            <Button x:Name="DeleteEmp" Content="Удалить" Width="75" Margin="5,5" Click="DeleteEmp_click"/>
+            <ComboBox Name="TypeObjectsFilterComboBox" Width="150" Margin="5,5" SelectionChanged="TypeObjectsFilterComboBox_SelectionChanged"/>
+            <TextBox x:Name="TypeObjectsFilterTextBox" Width="200" Margin="5,5" TextChanged="TypeObjectsFilterTextBox_TextChanged" />
         </StackPanel>
         <DataGrid x:Name="DataGridEmp" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns >
@@ -90,7 +91,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
+                
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
                         Номер паспорта
@@ -107,47 +108,49 @@
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding id_department}"/>
+                            <Label Content="{Binding department.name_department}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.Header>
-                        Должность
+                       Должность  
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding id_position}"/>
+                            <Label Content="{Binding positions.name_position}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+
         </DataGrid>
         <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Width="5"/>
-        <Label Content="Редактирование сотрудников" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Left" FontSize="14"/>
-        <Button Content="X" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseEdChangeClick" Width="20" Height="20"/>
+
+        <Button Content="X" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseEdChangeClick" Width="20" Height="20" />
         <ScrollViewer Grid.Column="2" Grid.Row="2">
             <StackPanel Orientation="Vertical" >
-                <Label Content = "Фамилия" Foreground="Black"/>
-                <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.surname}" x:Name="SurnameTextBox"/>
-                <Label Content="Отчество" Foreground="Black"/>
-                <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.patronymic}" x:Name="PatronymicTextBox"/>
-                <Label Content="Имя" Foreground="Black"/>
-                <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.name}" x:Name="NameTextBox"/>
+            <Label Content="Сотрудники" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Left" FontSize="16" FontStyle="Italic"/>
+            <Label Content = "Фамилия" Foreground="Black"/>
+            <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.surname}" x:Name="SurnameTextBox"/>
+            <Label Content = "Имя" Foreground="Black"/>
+            <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.name}" x:Name="nameTextBox"/>
+            <Label Content="Отчество" Foreground="Black"/>
+            <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.patronymic}" x:Name="PatronymicTextBox"/>
+            <Label Content="Дата приема заказа" Foreground="Black"/>
+            <DatePicker Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.date_of_employment}" x:Name="DatePick"/>
                 <Label Content = "Телефон" Foreground="Black"/>
                 <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.telephone}" x:Name="TelephoneTextBox"/>
-                <Label Content="Дата приема заказа" Foreground="Black"/>
-                <DatePicker Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.date_of_employment}" x:Name="DateBox"/>
-                <Label Content = "Серия паспорта" Foreground="Black"/>
-                <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.passport_series}" x:Name="seriesTextBox"/>
-                <Label Content = "Номер паспорта" Foreground="Black"/>
-                <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.passport_number}" x:Name="numberTextBox"/>
-                <Label Content = "Отдел" Foreground="Black"/>
-                <ComboBox x:Name="ComboBoxDep" DisplayMemberPath="name_department" Text="{Binding SelectedItem.Department.name_department, ElementName=DataGridEmp }" />
-                <Label Content = "Должность" Foreground="Black"/>
-                <ComboBox x:Name="ComboBoxPos" DisplayMemberPath="name_position"  Text="{Binding SelectedItem.Position.name_position, ElementName=DataGridEmp }"  />
-                <Button Content="Принять" Click="CommitButtonEmp" Margin="0 10 0 10"/>
-            </StackPanel>
+            <Label Content = "Серия паспорта" Foreground="Black"/>
+            <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.passport_series}" x:Name="seriesTextBox"/>
+            <Label Content = "Номер паспорта" Foreground="Black"/>
+            <TextBox Text="{Binding ElementName=DataGridEmp, Path=SelectedItem.passport_number}" x:Name="numberTextBox"/>
+            <Label Content = "Отдел" Foreground="Black"/>
+            <ComboBox x:Name="ComboBoxDep" DisplayMemberPath="name_department" Text="{Binding SelectedItem.Department.name_department, ElementName=DataGridEmp }" />
+            <Label Content = "Должность" Foreground="Black"/>
+            <ComboBox x:Name="ComboBoxPos" DisplayMemberPath="name_position"  Text="{Binding SelectedItem.Position.name_position, ElementName=DataGridEmp }"  />
+            <Button Content="Принять" Click="CommitButtonEmp" Margin="0 10 0 10"/>
+        </StackPanel>
         </ScrollViewer>
     </Grid>
 </Page>

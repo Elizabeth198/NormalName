@@ -108,6 +108,15 @@
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="product" Relationship="Self.FK_product_types_of_furniture" FromRole="types_of_furniture" ToRole="product" />
   </EntityType>
+  <EntityType Name="registration">
+    <Key>
+      <PropertyRef Name="id_registr" />
+    </Key>
+    <Property Name="id_registr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PASSWORD_N" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="role" Type="Int32" />
+  </EntityType>
   <Association Name="FK_orders_customers">
     <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
     <End Role="orders" Type="Self.orders" Multiplicity="*" />
@@ -192,7 +201,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Furnirure_salon_Pershina" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Furnirure_salon_Pershina1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="customers" EntityType="Self.customers" />
     <EntitySet Name="department" EntityType="Self.department" />
     <EntitySet Name="employee" EntityType="Self.employee" />
@@ -202,6 +211,7 @@
     <EntitySet Name="suppliers" EntityType="Self.suppliers" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="types_of_furniture" EntityType="Self.types_of_furniture" />
+    <EntitySet Name="registration" EntityType="Self.registration" />
     <AssociationSet Name="FK_orders_customers" Association="Self.FK_orders_customers">
       <End Role="customers" EntitySet="customers" />
       <End Role="orders" EntitySet="orders" />

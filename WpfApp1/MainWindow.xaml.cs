@@ -28,41 +28,57 @@ namespace WpfApp1
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Product());
+            Height = 450;
+            Width = 800;
         }
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Order());
+            Height = 600;
+            Width = 1300;
         }
 
         private void CustomerButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Customer());
+            Height = 450;
+            Width = 800;
         }
 
         private void SuppliersButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Supplier());
+            Height = 450;
+            Width = 800;
         }
 
         private void EmployeeButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Employee());
+            Height = 450;
+            Width = 800;
         }
 
         private void TypesFurnitureButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.TypeOfFurniture());
+            Height = 450;
+            Width = 800;
         }
 
         private void DepartmentButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Department());
+            Height = 450;
+            Width = 800;
         }
 
         private void PositionButton_Click(object sender, RoutedEventArgs e)
         {
             RootFrame.Navigate(new Pages.Position());
+            Height = 450;
+            Width = 800;
         }
 
         private void RootFrame_LoadCompleted(object sender, NavigationEventArgs e)
